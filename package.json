@@ -1,12 +1,13 @@
 {
-  "badges": [
-    "Reactjs, Webpack, Typescript, Styled-components"
-  ],
+  "version": "1.0.0",
   "author": {
     "email": "hbragaleao@gmail.com",
     "name": "Henrique Leão"
   },
-  "description": "this repository ",
+  "description": "this repository refers to the code leap test",
+  "scripts": {
+    "dev": "webpack-dev-server --config webpack.dev.js"
+  },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
+    "clean-webpack-plugin": "^4.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "git-commit-msg-linter": "^4.1.3",
     "html-webpack-plugin": "^5.5.0",

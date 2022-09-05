@@ -1,0 +1,12 @@
+# Default
+node_modules
+
+# Documentation
+!.storybook
+
+# Tests
+!.jest
+
+# Webpack
+webpack.js
+webpack.dev.js

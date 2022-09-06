@@ -18,16 +18,15 @@ export default {
       small: '1.4rem',
       medium: '1.6rem',
       large: '1.8rem',
-      xlarge: '2.0rem',
-      xxlarge: '2.8rem'
+      xlarge: '2.2rem',
+      xxlarge: '2.6rem'
     }
   },
   colors: {
     white: '#FAFAFA',
-    black: '#222',
+    black: '#000',
     lightGray: '#EAEAEA',
-    gray: '#8F8F8F',
-    darkGray: '#2E2F42'
+    gray: '#8F8F8F'
   },
   spacings: {
     xxsmall: '0.8rem',

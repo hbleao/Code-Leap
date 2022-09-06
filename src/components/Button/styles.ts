@@ -17,7 +17,7 @@ const modifier = {
     background-color: transparent;
 
     > svg {
-      width: 1.5rem;
+      width: 2rem;
       fill: & + span {
         margin-left: ${theme.spacings.xxsmall};
       }

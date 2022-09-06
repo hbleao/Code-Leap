@@ -4,8 +4,11 @@
   "description": "this repository refers to the code leap test",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "test": "jest",
+    "lint": "eslint ./src/** --fix",
+    "test": "jest --findRelatedTests --bail --passWithNoTests",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "generate": "yarn plop --plopfile ./generators/plopfile.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -48,6 +51,7 @@
     "jest": "^28.0.8",
     "jest-environment-jsdom": "^29.0.2",
     "jest-styled-components": "^7.1.1",
+    "plop": "^3.1.1",
     "prettier": "^2.7.1",
     "ts-jest": "^28.0.8",
     "ts-loader": "^9.3.1",

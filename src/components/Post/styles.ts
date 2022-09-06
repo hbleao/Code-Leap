@@ -19,7 +19,7 @@ export const Header = styled.div`
 `;
 
 export const ButtonGroup = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     display: flex;
     flex-direction: row;
     justify-items: center;
@@ -33,7 +33,7 @@ export const WrapperContent = styled.div`
 `;
 
 export const TitleContent = styled.div`
-  ${({ theme }) => css`
+  ${() => css`
     display: flex;
     justify-content: space-between;
   `}

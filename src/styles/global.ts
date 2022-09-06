@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     ${({ theme }) => css`
       body {
         font-family: ${theme.font.family};
+        background-color: ${theme.colors.mainBg};
       }
     `}
 `;

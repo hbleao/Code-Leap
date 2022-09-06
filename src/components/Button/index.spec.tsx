@@ -51,7 +51,7 @@ describe('Button', () => {
     expect(buttonElement).toBeInTheDocument();
     expect(buttonElement).toHaveAttribute('disabled');
     expect(buttonElement).toHaveStyle({
-      'background-color': '#8F8F8F',
+      'background-color': '#777777',
       color: '#000'
     });
   });

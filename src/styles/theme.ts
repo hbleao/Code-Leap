@@ -24,9 +24,10 @@ export default {
   },
   colors: {
     white: '#FAFAFA',
-    black: '#000',
-    lightGray: '#EAEAEA',
-    gray: '#8F8F8F'
+    mainBg: '#DDDDDD',
+    lightGray: '#CCCCCC',
+    gray: '#777777',
+    black: '#000'
   },
   spacings: {
     xxsmall: '0.8rem',

@@ -33,6 +33,7 @@ export const Container = styled.button<ContainerProps>`
     font-weight: ${theme.font.bold};
     color: ${theme.colors.white};
     background-color: ${theme.colors.black};
+    line-height: ${theme.font.sizes.large};
 
     ${hasIcon && modifier.withIcon(theme)}
     ${isOutline && modifier.outline(theme)};

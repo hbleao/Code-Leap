@@ -36,7 +36,7 @@ describe('Button', () => {
 
     expect(buttonElement).toBeInTheDocument();
     expect(buttonElement).toHaveStyle({
-      'background-color': '#222',
+      'background-color': '#000',
       color: '#FAFAFA'
     });
   });
@@ -52,7 +52,7 @@ describe('Button', () => {
     expect(buttonElement).toHaveAttribute('disabled');
     expect(buttonElement).toHaveStyle({
       'background-color': '#8F8F8F',
-      color: '#222'
+      color: '#000'
     });
   });
 
@@ -66,8 +66,8 @@ describe('Button', () => {
     expect(buttonElement).toBeInTheDocument();
     expect(buttonElement).toHaveStyle({
       'background-color': 'transparent',
-      color: '#222',
-      border: '1px solid #222'
+      color: '#000',
+      border: '1px solid #000'
     });
   });
 

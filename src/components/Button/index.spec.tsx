@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { screen } from '@testing-library/react';
+import { TrashBin } from '@styled-icons/ionicons-solid/TrashBin';
 
 import { Button } from '.';
 import { renderWithTheme } from '@/utils/tests/renderWithTheme';
@@ -8,15 +9,17 @@ type MakeSutProps = {
   children?: ReactNode;
   isDisabled?: boolean;
   isOutline?: boolean;
+  icon?: ReactNode;
 };
 
 const makeSut = ({
   children = 'click here',
   isDisabled = false,
-  isOutline = false
+  isOutline = false,
+  icon
 }: MakeSutProps) => {
   const sut = renderWithTheme(
-    <Button isDisabled={isDisabled} isOutline={isOutline}>
+    <Button isDisabled={isDisabled} isOutline={isOutline} icon={icon}>
       {children}
     </Button>
   );
@@ -66,5 +69,13 @@ describe('Button', () => {
       color: '#222',
       border: '1px solid #222'
     });
+  });
+
+  it('should render an icon version', () => {
+    makeSut({ children: 'buy now', icon: <TrashBin /> });
+
+    const buttonIcon = document.querySelector('svg');
+
+    expect(buttonIcon).toBeInTheDocument();
   });
 });

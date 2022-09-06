@@ -1,5 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { TrashBin } from '@styled-icons/ionicons-solid/TrashBin';
 
 import { Button } from '.';
 import { ButtonProps } from './types';
@@ -10,6 +11,11 @@ export default {
   args: {
     isDisabled: false,
     isOutline: false
+  },
+  argTypes: {
+    icon: {
+      type: 'symbol'
+    }
   }
 } as Meta;
 
@@ -32,4 +38,16 @@ export const Outline = Template.bind({});
 Outline.args = {
   children: 'Click here!',
   isOutline: true
+};
+
+export const WithIcon: Story<ButtonProps> = args => (
+  <Button {...args}>{args.children}</Button>
+);
+WithIcon.args = {
+  icon: <TrashBin />
+};
+WithIcon.parameters = {
+  backgrounds: {
+    default: 'dark'
+  }
 };

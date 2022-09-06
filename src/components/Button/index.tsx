@@ -7,6 +7,7 @@ export const Button = ({
   children,
   isDisabled = false,
   isOutline = false,
+  icon,
   ...props
 }: ButtonProps) => {
   return (
@@ -14,10 +15,12 @@ export const Button = ({
       isDisabled={isDisabled}
       disabled={isDisabled}
       isOutline={isOutline}
+      hasIcon={!!icon}
       aria-disabled={isDisabled}
       {...props}
     >
-      {children}
+      {icon}
+      {!!children && <span>{children}</span>}
     </Container>
   );
 };

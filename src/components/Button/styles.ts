@@ -11,11 +11,22 @@ const modifier = {
   disabled: (theme: DefaultTheme) => css`
     color: ${theme.colors.black};
     background-color: ${theme.colors.gray};
+  `,
+  withIcon: (theme: DefaultTheme) => css`
+    padding: ${theme.spacings.xxsmall};
+    background-color: transparent;
+
+    > svg {
+      width: 1.5rem;
+      fill: & + span {
+        margin-left: ${theme.spacings.xxsmall};
+      }
+    }
   `
 };
 
 export const Container = styled.button<ContainerProps>`
-  ${({ theme, isDisabled, isOutline }) => css`
+  ${({ theme, isDisabled, isOutline, hasIcon }) => css`
     border: none;
     padding: ${theme.spacings.xxsmall} ${theme.spacings.medium};
     font-size: ${theme.font.sizes.medium};
@@ -23,6 +34,7 @@ export const Container = styled.button<ContainerProps>`
     color: ${theme.colors.white};
     background-color: ${theme.colors.black};
 
+    ${hasIcon && modifier.withIcon(theme)}
     ${isOutline && modifier.outline(theme)};
     ${isDisabled && modifier.disabled(theme)};
   `}

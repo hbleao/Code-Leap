@@ -6,7 +6,12 @@ import { TextFieldProps } from './types';
 
 export default {
   title: 'TextField',
-  component: TextField
+  component: TextField,
+  args: {
+    label: '',
+    htmlFor: '',
+    initialValue: ''
+  }
 } as Meta;
 
 const Template: Story<TextFieldProps> = args => <TextField {...args} />;

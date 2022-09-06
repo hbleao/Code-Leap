@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { TextField } from '.';
+import { TextareaField } from '.';
 import { renderWithTheme } from '@/utils/tests/renderWithTheme';
 
 type makeSutProps = {
@@ -13,7 +13,11 @@ type makeSutProps = {
 
 const makeSut = ({ label, htmlFor, initialValue }: makeSutProps) => {
   const sut = renderWithTheme(
-    <TextField label={label} htmlFor={htmlFor} initialValue={initialValue} />
+    <TextareaField
+      label={label}
+      htmlFor={htmlFor}
+      initialValue={initialValue}
+    />
   );
 
   return {
@@ -21,8 +25,8 @@ const makeSut = ({ label, htmlFor, initialValue }: makeSutProps) => {
   };
 };
 
-describe('TextField', () => {
-  it('should be able render a TextField', () => {
+describe('TextareaField', () => {
+  it('should be able render a TextareaField', () => {
     makeSut({});
 
     const input = screen.getByRole('textbox', { name: '' });
@@ -32,16 +36,7 @@ describe('TextField', () => {
     expect(label).not.toBeInTheDocument();
   });
 
-  it('should be able render a TextField with initial value', () => {
-    makeSut({ initialValue: 'Jhon doe' });
-
-    waitFor(() => {
-      const input = screen.getByRole('textbox', { name: /jhon doe/i });
-      expect(input).toBeInTheDocument();
-    });
-  });
-
-  it('should be able render a TextField with label', () => {
+  it('should be able render a TextareaField with label', () => {
     makeSut({ label: 'Name', htmlFor: 'name' });
 
     const label = screen.getByText(/name/i);
@@ -49,11 +44,22 @@ describe('TextField', () => {
     expect(label).toBeInTheDocument();
   });
 
+  it('should be able render a TextareaField with initial value', () => {
+    makeSut({ initialValue: 'Short product description' });
+
+    waitFor(() => {
+      const input = screen.getByRole('textbox', {
+        name: /short product description/i
+      });
+      expect(input).toBeInTheDocument();
+    });
+  });
+
   it('Changes its value when typing', async () => {
     makeSut({});
 
     const input = screen.getByRole('textbox');
-    const text = 'This is my new text';
+    const text = 'This is my new text description';
 
     userEvent.type(input, text);
 

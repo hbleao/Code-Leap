@@ -20,3 +20,9 @@ export const Default = Template.bind({});
 Default.args = {
   placeholder: 'name'
 };
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  label: 'Name',
+  placeholder: 'Example: Jhon Doe'
+};

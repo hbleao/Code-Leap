@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.article`
   ${({ theme }) => css`
     width: 72rem;
     background-color: ${theme.colors.white};

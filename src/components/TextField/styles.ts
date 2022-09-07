@@ -23,6 +23,7 @@ export const Input = styled.input`
     line-height: ${theme.font.sizes.small};
     border: 1px solid ${theme.colors.black};
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
+    border-radius: ${theme.border.radius};
 
     &::placeholder {
       color: ${theme.colors.lightGray};

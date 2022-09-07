@@ -11,7 +11,7 @@ export default {
     layout: 'fullscreen'
   },
   argTypes: {
-    content: {
+    children: {
       type: 'symbol'
     }
   }
@@ -21,12 +21,12 @@ const Template: Story<ModalProps> = args => <Modal {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  content: <h2>Modal heading</h2>,
+  children: <h2>Modal heading</h2>,
   isOpen: false
 };
 
 export const Opened = Template.bind({});
 Opened.args = {
-  content: <h2>Modal heading</h2>,
+  children: <h2>Modal heading</h2>,
   isOpen: true
 };

@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components';
 
-import { ContainerProps } from './types';
+import { BoxContentProps, ContainerProps } from './types';
 
 const modifiers = {
   remove: () => css`
     display: none;
+  `,
+  small: () => css`
+    width: 50rem;
+  `,
+  medium: () => css`
+    width: 66rem;
   `
 };
 
@@ -25,12 +31,13 @@ export const Container = styled.section<ContainerProps>`
   `}
 `;
 
-export const BoxContent = styled.div`
-  ${({ theme }) => css`
-    width: 660px;
+export const BoxContent = styled.div<BoxContentProps>`
+  ${({ theme, size }) => css`
     background-color: ${theme.colors.white};
     padding: ${theme.spacings.medium};
     animation: moveUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+
+    ${!!size && modifiers[size]()}
 
     @keyframes moveUp {
       0% {

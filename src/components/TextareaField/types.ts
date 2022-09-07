@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from 'react';
+import { TextareaHTMLAttributes } from 'react';
 
-export type TextareaFieldProps = InputHTMLAttributes<HTMLTextAreaElement> & {
+export type TextareaFieldProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label?: string;
   htmlFor?: string;
   initialValue?: string;

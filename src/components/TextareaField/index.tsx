@@ -19,7 +19,7 @@ export const TextareaField = ({
   return (
     <S.Container>
       {!!label && <S.Label htmlFor={htmlFor}>{label}</S.Label>}
-      <S.Input id={htmlFor} {...props} value={value} onChange={onChange} />
+      <S.TextArea id={htmlFor} value={value} onChange={onChange} {...props} />
     </S.Container>
   );
 };

@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Label = styled.label`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.medium};
-    font-weight: ${theme.font.bold};
+    font-weight: ${theme.font.normal};
     line-height: ${theme.font.sizes.large};
     margin-bottom: ${theme.spacings.xxsmall};
   `}

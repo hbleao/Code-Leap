@@ -9,6 +9,7 @@ import { PostProps } from './types';
 
 import { Heading } from '../Heading';
 import { Button } from '../Button';
+import { truncateText } from '@/utils';
 
 export const Post = ({
   id,
@@ -26,7 +27,7 @@ export const Post = ({
   return (
     <S.Container>
       <S.Header>
-        <Heading color="white">{title}</Heading>
+        <Heading color="white">{truncateText(title, 50)}</Heading>
         <S.ButtonGroup>
           <Button
             onClick={() => handleDelete(id)}

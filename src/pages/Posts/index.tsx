@@ -3,8 +3,14 @@ import React from 'react';
 import * as S from './styles';
 
 import { Button, Heading, Post, TextareaField, TextField } from '@/components';
+import { useFetch } from '@/hooks';
+import { PostService } from '@/services';
+import { PostDTO } from '@/DTOs/Post';
 
 export const Posts = () => {
+  const { data, isLoading } = useFetch(PostService.get);
+  const showPostList = data?.results?.length > 0 && !isLoading;
+
   return (
     <S.Container>
       <S.Header>
@@ -25,39 +31,19 @@ export const Posts = () => {
         </S.Form>
 
         <S.PostList>
-          <Post
-            id={1234345645678}
-            username={'@Henrique'}
-            title={'How to create a component in react?'}
-            content={
-              'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem'
-            }
-            created_datetime={'2022-09-06T04:11:13.301945Z'}
-            handleDelete={() => null}
-            handleEdit={() => null}
-          />
-          <Post
-            id={1234345645678}
-            username={'@Henrique'}
-            title={'How to create a component in react?'}
-            content={
-              'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem'
-            }
-            created_datetime={'2021-07-06T04:11:13.301945Z'}
-            handleDelete={() => null}
-            handleEdit={() => null}
-          />
-          <Post
-            id={1234345645678}
-            username={'@Henrique'}
-            title={'How to create a component in react?'}
-            content={
-              'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem'
-            }
-            created_datetime={'2022-09-06T04:11:13.301945Z'}
-            handleDelete={() => null}
-            handleEdit={() => null}
-          />
+          {showPostList &&
+            data.results.map((post: PostDTO) => (
+              <Post
+                key={post.id}
+                id={post.id}
+                username={post.username}
+                title={post.title}
+                content={post.content}
+                created_datetime={post.created_datetime}
+                handleDelete={() => null}
+                handleEdit={() => null}
+              />
+            ))}
         </S.PostList>
       </S.Content>
     </S.Container>

@@ -4,7 +4,7 @@ import * as S from './styles';
 
 import { Button, Heading, Modal, TextField } from '@/components';
 
-export const Home = () => {
+export const SignIn = () => {
   return (
     <Modal isOpen={true} size="small">
       <Heading>Welcome to CodeLeap network!</Heading>

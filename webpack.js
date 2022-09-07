@@ -29,6 +29,11 @@ module.exports = {
           name: '[path][name].[ext]',
         },
       },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   plugins: [

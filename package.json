@@ -4,7 +4,7 @@
   "description": "this repository refers to the code leap test",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "lint": "eslint ./src/** --fix",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "test": "jest --bail --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@styled-icons/ionicons-solid": "^10.34.0",
+    "date-fns": "^2.29.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6",
@@ -30,6 +31,7 @@
     "@storybook/manager-webpack5": "^6.5.10",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@svgr/webpack": "^6.3.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",

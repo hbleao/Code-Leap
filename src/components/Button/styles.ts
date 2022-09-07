@@ -13,11 +13,10 @@ const modifier = {
     background-color: ${theme.colors.gray};
   `,
   withIcon: (theme: DefaultTheme) => css`
-    padding: ${theme.spacings.xxsmall};
+    padding: 0;
     background-color: transparent;
 
     > svg {
-      width: 2rem;
       fill: & + span {
         margin-left: ${theme.spacings.xxsmall};
       }

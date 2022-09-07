@@ -1,5 +1,8 @@
 import React from 'react';
-import { TrashBin } from '@styled-icons/ionicons-solid/TrashBin';
+import { formatDistance } from 'date-fns';
+
+import SvgDelete from '@/assets/icon-delete.svg';
+import SvgEdit from '@/assets/icon-edit.svg';
 
 import * as S from './styles';
 import { PostProps } from './types';
@@ -16,6 +19,10 @@ export const Post = ({
   handleDelete,
   handleEdit
 }: PostProps) => {
+  const period = formatDistance(new Date(created_datetime), new Date(), {
+    addSuffix: true
+  });
+
   return (
     <S.Container>
       <S.Header>
@@ -23,12 +30,12 @@ export const Post = ({
         <S.ButtonGroup>
           <Button
             onClick={() => handleDelete(id)}
-            icon={<TrashBin />}
+            icon={<SvgDelete />}
             aria-label="Delete post"
           />
           <Button
             onClick={() => handleEdit(id)}
-            icon={<TrashBin />}
+            icon={<SvgEdit />}
             aria-label="Edit post"
           />
         </S.ButtonGroup>
@@ -36,7 +43,7 @@ export const Post = ({
       <S.WrapperContent>
         <S.TitleContent>
           <S.Username>{username}</S.Username>
-          <S.DateTime>{created_datetime}</S.DateTime>
+          <S.DateTime>{period}</S.DateTime>
         </S.TitleContent>
 
         <S.Content>{content}</S.Content>

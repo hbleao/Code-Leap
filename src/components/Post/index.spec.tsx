@@ -40,6 +40,8 @@ const makeSut = ({
   };
 };
 
+jest.mock('date-fns', () => ({ formatDistance: jest.fn(() => 'last month') }));
+
 describe('Post', () => {
   it('should be render a Post correctly', () => {
     makeSut({});
@@ -47,7 +49,7 @@ describe('Post', () => {
     const username = screen.getByText(/@henrique/i);
     const title = screen.getByText(/How to create a component in react/i);
     const description = screen.getByText(/lorem lorem lorem/i);
-    const date = screen.getByText(/2022-09-06/i);
+    const date = screen.getByText(/last month/i);
 
     expect(username).toBeInTheDocument();
     expect(title).toBeInTheDocument();

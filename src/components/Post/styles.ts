@@ -4,6 +4,7 @@ export const Container = styled.article`
   ${({ theme }) => css`
     width: 72rem;
     background-color: ${theme.colors.white};
+    border: 1px solid ${theme.colors.gray};
   `}
 `;
 
@@ -19,10 +20,11 @@ export const Header = styled.div`
 `;
 
 export const ButtonGroup = styled.div`
-  ${() => css`
+  ${({ theme }) => css`
     display: flex;
     flex-direction: row;
     justify-items: center;
+    gap: ${theme.spacings.small};
   `}
 `;
 

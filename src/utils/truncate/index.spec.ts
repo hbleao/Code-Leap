@@ -1,6 +1,6 @@
 import { truncateText } from '.';
 
-describe('TruncateText', () => {
+describe('Utils/TruncateText', () => {
   it('should render text with 23 characters', () => {
     const text = 'lorem lorem lorem lorem';
 

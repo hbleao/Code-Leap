@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 
 import * as S from './styles';
 import { TextareaFieldProps } from './types';
@@ -6,16 +6,10 @@ import { TextareaFieldProps } from './types';
 export const TextareaField = ({
   label,
   htmlFor = '',
-  initialValue = '',
+  value,
+  onChange,
   ...props
 }: TextareaFieldProps) => {
-  const [value, setValue] = useState(initialValue);
-
-  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = event.target.value;
-    setValue(newValue);
-  };
-
   return (
     <S.Container>
       {!!label && <S.Label htmlFor={htmlFor}>{label}</S.Label>}

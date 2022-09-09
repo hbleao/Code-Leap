@@ -24,6 +24,7 @@ export const TextArea = styled.textarea`
     border: 1px solid ${theme.colors.black};
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
     border-radius: ${theme.border.radius};
+    resize: none;
 
     &::placeholder {
       color: ${theme.colors.lightGray};

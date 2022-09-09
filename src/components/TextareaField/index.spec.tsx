@@ -9,14 +9,21 @@ type makeSutProps = {
   label?: string;
   htmlFor?: string;
   initialValue?: string;
+  onInputChange?: (value: string) => void;
 };
 
-const makeSut = ({ label, htmlFor, initialValue }: makeSutProps) => {
+const makeSut = ({
+  label,
+  htmlFor,
+  initialValue,
+  onInputChange
+}: makeSutProps) => {
   const sut = renderWithTheme(
     <TextareaField
       label={label}
       htmlFor={htmlFor}
       initialValue={initialValue}
+      onInputChange={onInputChange}
     />
   );
 
@@ -65,6 +72,20 @@ describe('TextareaField', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text);
+    });
+  });
+
+  it('Changes its value when typing', async () => {
+    const onInputChange = jest.fn();
+    makeSut({ onInputChange });
+    const input = screen.getByRole('textbox');
+    const text = 'This is my new text description';
+
+    userEvent.type(input, text);
+
+    await waitFor(() => {
+      expect(input).toHaveValue(text);
+      expect(onInputChange).toHaveBeenCalledWith(text);
     });
   });
 });

@@ -6,3 +6,20 @@ export type PostServiceResult = {
   previous: string | null;
   results: PostDTO[];
 };
+
+export type CreatePostProps = {
+  username: string;
+  title: string;
+  content: string;
+};
+
+export type GetPostProps = {
+  limit: number;
+  offset?: number;
+};
+
+export type UpdatePostProps = {
+  id: number;
+  title: string;
+  content: string;
+};

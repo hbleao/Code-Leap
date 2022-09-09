@@ -3,11 +3,15 @@ import React from 'react';
 import { Container } from './styles';
 import { ButtonProps } from './types';
 
+import { ButtonLoader } from './ButtonLoader';
+
 export const Button = ({
   children,
+  loaderColor = 'white',
   isDisabled = false,
   isOutline = false,
   icon,
+  isLoading = false,
   ...props
 }: ButtonProps) => {
   return (
@@ -20,7 +24,8 @@ export const Button = ({
       {...props}
     >
       {icon}
-      {!!children && <span>{children}</span>}
+      {!!children && !isLoading && <span>{children}</span>}
+      {isLoading && <ButtonLoader loaderColor={loaderColor} />}
     </Container>
   );
 };

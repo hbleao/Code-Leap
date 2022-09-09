@@ -11,6 +11,7 @@ const modifier = {
   disabled: (theme: DefaultTheme) => css`
     color: ${theme.colors.black};
     background-color: ${theme.colors.gray};
+    cursor: not-allowed;
   `,
   withIcon: (theme: DefaultTheme) => css`
     padding: 0;

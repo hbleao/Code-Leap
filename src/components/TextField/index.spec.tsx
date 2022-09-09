@@ -9,11 +9,22 @@ type makeSutProps = {
   label?: string;
   htmlFor?: string;
   initialValue?: string;
+  onInputChange?: (value: string) => void;
 };
 
-const makeSut = ({ label, htmlFor, initialValue }: makeSutProps) => {
+const makeSut = ({
+  label,
+  htmlFor,
+  initialValue,
+  onInputChange
+}: makeSutProps) => {
   const sut = renderWithTheme(
-    <TextField label={label} htmlFor={htmlFor} initialValue={initialValue} />
+    <TextField
+      label={label}
+      htmlFor={htmlFor}
+      initialValue={initialValue}
+      onInputChange={onInputChange}
+    />
   );
 
   return {
@@ -50,8 +61,8 @@ describe('TextField', () => {
   });
 
   it('Changes its value when typing', async () => {
-    makeSut({});
-
+    const onInputChange = jest.fn();
+    makeSut({ onInputChange });
     const input = screen.getByRole('textbox');
     const text = 'This is my new text';
 
@@ -59,6 +70,7 @@ describe('TextField', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text);
+      expect(onInputChange).toHaveBeenCalledWith(text);
     });
   });
 });

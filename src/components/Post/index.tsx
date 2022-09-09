@@ -13,6 +13,7 @@ import { truncateText } from '@/utils';
 
 export const Post = ({
   id,
+  currentUsername,
   username,
   title,
   content,
@@ -23,23 +24,26 @@ export const Post = ({
   const period = formatDistance(new Date(created_datetime), new Date(), {
     addSuffix: true
   });
+  const isOwner = username === currentUsername;
 
   return (
     <S.Container>
       <S.Header>
-        <Heading color="white">{truncateText(title, 50)}</Heading>
-        <S.ButtonGroup>
-          <Button
-            onClick={() => handleDelete(id)}
-            icon={<SvgDelete />}
-            aria-label="Delete post"
-          />
-          <Button
-            onClick={() => handleEdit(id)}
-            icon={<SvgEdit />}
-            aria-label="Edit post"
-          />
-        </S.ButtonGroup>
+        <Heading color="white">{truncateText(title, 45)}</Heading>
+        {isOwner && (
+          <S.ButtonGroup>
+            <Button
+              onClick={() => handleDelete(id)}
+              icon={<SvgDelete />}
+              aria-label="Delete post"
+            />
+            <Button
+              onClick={() => handleEdit({ id, title, content })}
+              icon={<SvgEdit />}
+              aria-label="Edit post"
+            />
+          </S.ButtonGroup>
+        )}
       </S.Header>
       <S.WrapperContent>
         <S.TitleContent>

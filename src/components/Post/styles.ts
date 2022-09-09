@@ -1,21 +1,31 @@
 import styled, { css } from 'styled-components';
+import media from 'styled-media-query';
 
 export const Container = styled.article`
   ${({ theme }) => css`
-    width: 72rem;
     background-color: ${theme.colors.white};
     border: 1px solid ${theme.colors.gray};
+
+    ${media.greaterThan('small')`
+      width: 72rem;
+    `}
   `}
 `;
 
 export const Header = styled.div`
   ${({ theme }) => css`
-    height: 7rem;
     background-color: ${theme.colors.black};
     padding: ${theme.spacings.small} ${theme.spacings.medium};
     display: flex;
-    justify-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: ${theme.spacings.xxsmall};
+
+    ${media.greaterThan('small')`
+      height: 7rem;
+      flex-direction: row;
+      justify-items: center;
+      justify-content: space-between;
+    `}
   `}
 `;
 
@@ -23,8 +33,13 @@ export const ButtonGroup = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: row;
-    justify-items: center;
+    justify-content: flex-end;
+    margin-top: ${theme.spacings.xsmall};
     gap: ${theme.spacings.small};
+
+    ${media.greaterThan('small')`
+      margin: 0;
+    `}
   `}
 `;
 

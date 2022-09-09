@@ -4,17 +4,14 @@ import { PageProps } from './types';
 
 export const Page = styled.div<PageProps>`
   ${({ theme, active }) => css`
-    width: 35px;
-    height: 35px;
+    min-width: 3.5rem;
+    height: 3.5rem;
+    padding: ${theme.spacings.xxsmall} ${theme.spacings.xsmall};
     background-color: ${active ? theme.colors.gray : theme.colors.black};
     color: ${theme.colors.white};
-    font-weight: 500;
-    font-size: 16px;
+    font-weight: ${theme.font.normal};
+    font-size: ${theme.font.sizes.medium};
     cursor: pointer;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px;
+    border-radius: ${theme.border.radius};
   `}
 `;

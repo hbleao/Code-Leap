@@ -5,19 +5,23 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: ${theme.spacings.medium};
+    padding: ${theme.spacings.medium} 0;
   `}
 `;
 
 export const WrapperPagination = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => css`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: ${theme.spacings.xxsmall};
+  `}
 `;
 
 export const TotalPagination = styled.p`
   ${({ theme }) => css`
     display: flex;
-    font-size: 16px;
+    font-size: ${theme.font.sizes.medium};
     color: ${theme.colors.gray};
   `}
 `;
@@ -25,7 +29,7 @@ export const TotalPagination = styled.p`
 export const TextHighlight = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.gray};
-    font-weight: 400;
+    font-weight: ${theme.font.normal};
     margin: 0 4px;
   `}
 `;

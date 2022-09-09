@@ -4,3 +4,6 @@ export { Modal } from './Modal';
 export { Post } from './Post';
 export { TextField } from './TextField';
 export { TextareaField } from './TextareaField';
+export { Skeleton } from './Skeleton';
+export { Pagination } from './Pagination';
+export { ErrorBoundary } from './ErrorBoundary';

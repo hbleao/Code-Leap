@@ -2,10 +2,10 @@
 node_modules
 
 # Documentation
-!.storybook
+.storybook
 
 # Tests
-!.jest
+jest
 
 # Webpack
 webpack.js

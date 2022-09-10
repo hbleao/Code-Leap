@@ -1,2 +1,9 @@
-export { authSlice } from './authReducer';
-export { postSlice } from './postReducer';
+import { combineReducers } from '@reduxjs/toolkit';
+
+import { authSlice } from './authReducer';
+import { postSlice } from './postReducer';
+
+export const rootReducers = combineReducers({
+  auth: authSlice.reducer,
+  posts: postSlice.reducer
+});

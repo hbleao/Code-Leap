@@ -8,22 +8,22 @@ import { renderWithTheme } from '@/utils/tests/renderWithTheme';
 type makeSutProps = {
   label?: string;
   htmlFor?: string;
-  initialValue?: string;
-  onInputChange?: (value: string) => void;
+  onChange?: () => void;
+  value?: string;
 };
 
 const makeSut = ({
   label,
   htmlFor,
-  initialValue,
-  onInputChange
+  value,
+  onChange = jest.fn()
 }: makeSutProps) => {
   const sut = renderWithTheme(
     <TextField
       label={label}
       htmlFor={htmlFor}
-      initialValue={initialValue}
-      onInputChange={onInputChange}
+      value={value}
+      onChange={onChange}
     />
   );
 
@@ -44,7 +44,7 @@ describe('TextField', () => {
   });
 
   it('should be able render a TextField with initial value', () => {
-    makeSut({ initialValue: 'Jhon doe' });
+    makeSut({ value: 'Jhon doe' });
 
     waitFor(() => {
       const input = screen.getByRole('textbox', { name: /jhon doe/i });
@@ -52,17 +52,9 @@ describe('TextField', () => {
     });
   });
 
-  it('should be able render a TextField with label', () => {
-    makeSut({ label: 'Name', htmlFor: 'name' });
-
-    const label = screen.getByText(/name/i);
-
-    expect(label).toBeInTheDocument();
-  });
-
   it('Changes its value when typing', async () => {
-    const onInputChange = jest.fn();
-    makeSut({ onInputChange });
+    const onChange = jest.fn();
+    makeSut({ onChange });
     const input = screen.getByRole('textbox');
     const text = 'This is my new text';
 
@@ -70,7 +62,6 @@ describe('TextField', () => {
 
     await waitFor(() => {
       expect(input).toHaveValue(text);
-      expect(onInputChange).toHaveBeenCalledWith(text);
     });
   });
 });

@@ -1,22 +1,17 @@
 import { PostServiceResult } from '@/hooks/usePosts/types';
 import { RootState } from '@/redux/store';
 import { Dispatch, FormEvent } from 'react';
-
-type Fields = {
-  title: string;
-  content: string;
-};
+import { InitialStateProps } from './usePostReducer/types';
 
 export type PresentationProps = {
-  state: RootState;
-  showPostList: boolean;
-  isPostLoading: boolean;
-  isCreatingPost: boolean;
-  isDisabled: boolean;
-  fields: Fields;
-  setFields: Dispatch<Fields>;
-  dispatch: Dispatch<any>;
-  data: PostServiceResult;
+  reduxState: RootState;
+  reduxDispatch: Dispatch<any>;
+  postList: PostServiceResult;
+  dispatch: any;
+  isDisableButtonCreatePost: boolean;
+  isDisableButtonUpdatePost: boolean;
+  state: InitialStateProps;
+  isPostListLoading: boolean;
   setPagination: Dispatch<any>;
   pagination: any;
   handleSubmit: (event: FormEvent) => void;

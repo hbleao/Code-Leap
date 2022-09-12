@@ -1,5 +1,6 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useReducer, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import { Presentation } from './Presentation';
 
@@ -8,83 +9,99 @@ import { usePosts } from '@/hooks';
 import { PostService } from '@/services';
 
 import { RootState } from '@/redux/store';
-import {
-  closeDeleteModal,
-  closeEditModal,
-  setIsLoading
-} from '@/redux/reducers/postReducer';
+
+import { initialState } from '@/constants/pages';
+
+import { postsReducer } from './usePostReducer';
 
 export const Posts = () => {
-  const dispatch = useDispatch();
-  const state = useSelector((state: RootState) => state);
-  const [fields, setFields] = useState({ title: '', content: '' });
-  const [updatePostList, setUpdatePostList] = useState({});
+  const reduxDispatch = useDispatch();
+  const reduxState = useSelector((state: RootState) => state);
+  const [state, dispatch] = useReducer(postsReducer, initialState);
   const {
-    data,
+    data: postList,
     isLoading: isPostListLoading,
     setPagination,
     pagination
-  } = usePosts(updatePostList);
-  const [isCreatingPost, setIsCreatingPost] = useState(false);
-  const showPostList = data?.results?.length > 0 && !isPostListLoading;
-  const isDisabled = !fields.title || !fields.content || isCreatingPost;
+  } = usePosts(state.updatePostList);
+  const isDisableButtonCreatePost =
+    !state.title || !state.content || state.isCreatingPost;
+  const isDisableButtonUpdatePost =
+    !reduxState.posts.post.title ||
+    !reduxState.posts.post.content ||
+    state.isUpdatingPost;
 
   const handleSubmit = async (event: FormEvent) => {
     try {
-      setIsCreatingPost(true);
+      dispatch({ type: 'CreatePost' });
       event.preventDefault();
 
       const newPost = {
-        username: state.auth.username,
-        title: fields.title,
-        content: fields.content
+        username: reduxState.auth.username,
+        title: state.title,
+        content: state.content
       };
 
       await PostService.create(newPost);
-      setUpdatePostList(new Date());
+      toast.success('Uhull..., Post created!', {
+        position: 'top-right',
+        style: {
+          fontSize: 16
+        }
+      });
     } catch (error) {
       console.error(error);
     } finally {
-      setIsCreatingPost(false);
-      setFields({ title: '', content: '' });
-    }
-  };
-
-  const handleDeletePost = async () => {
-    try {
-      dispatch(setIsLoading(true));
-      await PostService.delete(state.posts.post.id);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      dispatch(closeDeleteModal());
-      setUpdatePostList(new Date());
+      dispatch({ type: 'PostCreated' });
     }
   };
 
   const handleUpdatePost = async () => {
     try {
-      dispatch(setIsLoading(true));
-      await PostService.update(state.posts.post);
+      dispatch({ type: 'UpdatePost' });
+      await PostService.update(reduxState.posts.post);
+      toast.success('Uhull..., Post Updatet!', {
+        position: 'top-right',
+        style: {
+          fontSize: 16
+        }
+      });
     } catch (error) {
       console.error(error);
     } finally {
-      dispatch(closeEditModal());
-      setUpdatePostList(new Date());
+      dispatch({ type: 'PostUpdated' });
+      dispatch({ type: 'setShowEditModal', payload: false });
+    }
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      dispatch({ type: 'DeletePost' });
+      await PostService.delete(reduxState.posts.post.id);
+      toast.success('Uhull..., Post Deleted!', {
+        position: 'top-right',
+        style: {
+          fontSize: 16
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      dispatch({ type: 'PostDeleted' });
+      dispatch({ type: 'setShowDeleteModal', payload: false });
     }
   };
 
   return (
     <Presentation
+      reduxState={reduxState}
+      reduxDispatch={reduxDispatch}
       state={state}
       dispatch={dispatch}
-      showPostList={showPostList}
-      isDisabled={isDisabled}
-      isPostLoading={isPostListLoading}
-      isCreatingPost={isCreatingPost}
-      fields={fields}
-      setFields={setFields}
-      data={data}
+      postList={postList}
+      isDisableButtonCreatePost={isDisableButtonCreatePost}
+      isDisableButtonUpdatePost={isDisableButtonUpdatePost}
+      isPostListLoading={isPostListLoading}
       pagination={pagination}
       setPagination={setPagination}
       handleDeletePost={handleDeletePost}

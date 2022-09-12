@@ -16,28 +16,24 @@ import {
   TextField
 } from '@/components';
 
-import {
-  toggleDeleteModal,
-  toggleEditModal
-} from '@/redux/reducers/postReducer';
+import { setCurrentPostData } from '@/redux/reducers/postReducer';
 
 import { PresentationProps } from './types';
 
 export const Presentation = ({
-  showPostList,
-  isDisabled,
-  isPostLoading,
-  isCreatingPost,
-  fields,
-  setFields,
+  reduxState,
+  reduxDispatch,
+  postList,
   state,
   dispatch,
-  data,
-  handleSubmit,
-  setPagination,
+  isDisableButtonCreatePost,
+  isDisableButtonUpdatePost,
+  isPostListLoading,
   pagination,
+  setPagination,
+  handleDeletePost,
   handleUpdatePost,
-  handleDeletePost
+  handleSubmit
 }: PresentationProps) => {
   return (
     <S.Container>
@@ -51,12 +47,9 @@ export const Presentation = ({
             <TextField
               label="Title (required)"
               placeholder="Your name"
-              value={fields.title}
-              onChange={value =>
-                setFields({
-                  ...fields,
-                  title: value.target.value
-                })
+              value={state.title}
+              onChange={e =>
+                dispatch({ type: 'setTitle', payload: e.target.value })
               }
               autoFocus
               aria-required
@@ -65,12 +58,9 @@ export const Presentation = ({
           <S.InputGroup>
             <TextareaField
               label="Content (required)"
-              value={fields.content}
-              onChange={value =>
-                setFields({
-                  ...fields,
-                  content: value.target.value
-                })
+              value={state.content}
+              onChange={e =>
+                dispatch({ type: 'setContent', payload: e.target.value })
               }
               rows={10}
               aria-required
@@ -79,32 +69,33 @@ export const Presentation = ({
           <S.ButtonGroup>
             <Button
               type="submit"
-              isDisabled={isDisabled}
-              isLoading={isCreatingPost}
+              isDisabled={isDisableButtonCreatePost}
+              isLoading={state.isCreatingPost}
             >
-              CREATE
+              Create
             </Button>
           </S.ButtonGroup>
         </S.Form>
 
-        {showPostList && (
+        {postList?.results?.length > 0 && !isPostListLoading && (
           <ErrorBoundary>
             <S.PostList>
-              {data.results.map((post: PostDTO) => (
+              {postList.results.map((post: PostDTO) => (
                 <Post
                   key={post.id}
                   id={post.id}
                   username={post.username}
-                  currentUsername={state.auth.username}
+                  currentUsername={reduxState.auth.username}
                   title={post.title}
                   content={post.content}
                   created_datetime={post.created_datetime}
-                  handleDelete={postId =>
-                    dispatch(toggleDeleteModal([postId, true]))
-                  }
+                  handleDelete={postParams => {
+                    reduxDispatch(setCurrentPostData(postParams));
+                    dispatch({ type: 'setShowDeleteModal', payload: true });
+                  }}
                   handleEdit={postParams => {
-                    dispatch(toggleEditModal([postParams, true]));
-                    setFields({ ...fields, ...postParams });
+                    reduxDispatch(setCurrentPostData(postParams));
+                    dispatch({ type: 'setShowEditModal', payload: true });
                   }}
                 />
               ))}
@@ -112,8 +103,8 @@ export const Presentation = ({
             <div>
               <Pagination
                 activePage={pagination.activePage}
-                total={data.count}
-                totalPages={Math.round(data.count)}
+                total={postList.count}
+                totalPages={Math.round(postList.count)}
                 onClick={page => {
                   setPagination({
                     ...pagination,
@@ -126,7 +117,7 @@ export const Presentation = ({
           </ErrorBoundary>
         )}
 
-        {isPostLoading && (
+        {isPostListLoading && (
           <S.ShimmerContainer>
             {[1, 2, 3].map(item => (
               <Skeleton key={item} width={80} height={30} />
@@ -134,45 +125,46 @@ export const Presentation = ({
           </S.ShimmerContainer>
         )}
       </S.Content>
-      <Modal isOpen={state.posts.showDeleteModal}>
+      <Modal isOpen={state.showDeleteModal} size="large">
         <S.ModalTitle>Are you sure you want to delete this item ?</S.ModalTitle>
         <S.ModalContent>
           <Button
+            tabIndex={0}
+            type="button"
             isOutline
             onClick={() =>
-              dispatch(
-                toggleDeleteModal({
-                  post: null,
-                  showDeletePostModal: false
-                })
-              )
+              dispatch({ type: 'setShowDeleteModal', payload: false })
             }
           >
-            cancel
+            Cancel
           </Button>
           <Button
+            tabIndex={0}
             isOutline
             loaderColor="black"
             onClick={handleDeletePost}
-            isLoading={state.posts.isLoading}
+            isLoading={state.isDeletingPost}
           >
             Delete
           </Button>
         </S.ModalContent>
       </Modal>
-      <Modal isOpen={state.posts.showEditModal} size="large">
+
+      <Modal isOpen={state.showUpdateModal} size="large">
         <S.ModalForm onSubmit={handleSubmit}>
           <Heading>What’s on your mind?</Heading>
           <S.InputGroup>
             <TextField
               label="Title (required)"
               placeholder="Your name"
-              value={fields.title}
-              onChange={value =>
-                setFields({
-                  ...fields,
-                  title: value.target.value
-                })
+              value={reduxState.posts.post.title}
+              onChange={e =>
+                reduxDispatch(
+                  setCurrentPostData({
+                    ...reduxState.posts.post,
+                    title: e.target.value
+                  })
+                )
               }
               autoFocus
               aria-required
@@ -181,28 +173,40 @@ export const Presentation = ({
           <S.InputGroup>
             <TextareaField
               label="Content (required)"
-              value={fields.content}
-              onChange={value =>
-                setFields({
-                  ...fields,
-                  content: value.target.value
-                })
+              value={reduxState.posts.post.content}
+              onChange={e =>
+                reduxDispatch(
+                  setCurrentPostData({
+                    ...reduxState.posts.post,
+                    content: e.target.value
+                  })
+                )
               }
               rows={5}
               aria-required
             />
           </S.InputGroup>
-          <S.ButtonGroup>
+          <S.ModalContent>
             <Button
-              type="submit"
-              loaderColor="black"
+              tabIndex={0}
+              type="button"
+              isOutline
+              onClick={() =>
+                dispatch({ type: 'setShowEditModal', payload: false })
+              }
+            >
+              Cancel
+            </Button>
+            <Button
+              tabIndex={0}
+              type="button"
               onClick={handleUpdatePost}
-              isDisabled={isDisabled}
-              isLoading={state.posts.isLoading}
+              isDisabled={isDisableButtonUpdatePost}
+              isLoading={state.isUpdatingPost}
             >
               Save
             </Button>
-          </S.ButtonGroup>
+          </S.ModalContent>
         </S.ModalForm>
       </Modal>
     </S.Container>

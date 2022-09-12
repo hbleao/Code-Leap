@@ -7,7 +7,7 @@ import { renderWithTheme } from '@/utils/tests/renderWithTheme';
 type MakeSutProps = {
   children?: ReactNode;
   isOpen?: boolean;
-  size?: 'small' | 'medium';
+  size?: 'small' | 'medium' | 'large';
 };
 
 const modalDiv = document.createElement('div');
@@ -51,13 +51,23 @@ describe('Modal', () => {
     });
   });
 
-  it('should be render a small size by default', async () => {
+  it('should be render a small size by default on mobile version', async () => {
     makeSut({ isOpen: true });
 
     const modal = screen.getByText(/Modal/i);
 
     expect(modal).toHaveStyle({
-      width: '50rem'
+      width: '90%'
+    });
+  });
+
+  it('should be render a small size by default on desktop version', async () => {
+    makeSut({ isOpen: true });
+
+    const modal = screen.getByText(/Modal/i);
+
+    expect(modal).toHaveStyleRule('width', '50rem', {
+      media: '(min-width: 450px)'
     });
   });
 
@@ -66,8 +76,18 @@ describe('Modal', () => {
 
     const modal = screen.getByText(/Modal/i);
 
-    expect(modal).toHaveStyle({
-      width: '66rem'
+    expect(modal).toHaveStyleRule('width', '66rem', {
+      media: '(min-width: 450px)'
+    });
+  });
+
+  it('should be render a large Modal', async () => {
+    makeSut({ isOpen: true, size: 'large' });
+
+    const modal = screen.getByText(/Modal/i);
+
+    expect(modal).toHaveStyleRule('width', '72rem', {
+      media: '(min-width: 450px)'
     });
   });
 });

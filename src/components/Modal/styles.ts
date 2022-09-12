@@ -8,22 +8,16 @@ const modifiers = {
     display: none;
   `,
   small: () => css`
-    width: 90%;
-
     ${media.greaterThan('small')`
       width: 50rem;
     `}
   `,
   medium: () => css`
-    width: 90%;
-
     ${media.greaterThan('small')`
         width: 66rem;
     `}
   `,
   large: () => css`
-    width: 90%;
-
     ${media.greaterThan('small')`
         width: 72rem;
     `}

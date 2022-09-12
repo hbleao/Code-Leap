@@ -9,16 +9,17 @@ describe('Pagination', () => {
   it('should render pagination with 1 active page', () => {
     const pagination = {
       activePage: 1,
-      totalPages: 1,
-      total: 10,
+      totalPages: 10,
+      total: 1000,
       onClick: () => null
     };
     renderWithTheme(<Pagination {...pagination} />);
 
     const paginationNumber = screen.getByText('1');
+
     expect(paginationNumber).toBeInTheDocument();
     expect(paginationNumber).toHaveStyle({
-      backgroundColor: '#F9335B'
+      backgroundColor: '#777777'
     });
   });
 
@@ -37,13 +38,13 @@ describe('Pagination', () => {
     const thirdPagination = screen.getByText('3');
 
     expect(firstPagination).toHaveStyle({
-      backgroundColor: '#616480'
+      backgroundColor: '#000000'
     });
     expect(secondPagination).toHaveStyle({
-      backgroundColor: '#F9335B'
+      backgroundColor: '#777777'
     });
     expect(thirdPagination).toHaveStyle({
-      backgroundColor: '#616480'
+      backgroundColor: '#000000'
     });
   });
 
@@ -62,7 +63,7 @@ describe('Pagination', () => {
 
     expect(dotPagination).toBeInTheDocument();
     expect(firstPagination).toHaveStyle({
-      backgroundColor: '#F9335B'
+      backgroundColor: '#777777'
     });
   });
 
@@ -81,7 +82,7 @@ describe('Pagination', () => {
 
     expect(dotPagination).toBeInTheDocument();
     expect(eightTeenThPagination).toHaveStyle({
-      backgroundColor: '#F9335B'
+      backgroundColor: '#777777'
     });
   });
 
@@ -101,7 +102,7 @@ describe('Pagination', () => {
     expect(dotPagination1).toBeInTheDocument();
     expect(dotPagination2).toBeInTheDocument();
     expect(teenThPagination).toHaveStyle({
-      backgroundColor: '#F9335B'
+      backgroundColor: '#777777'
     });
   });
 

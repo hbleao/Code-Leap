@@ -13,7 +13,11 @@ export const PaginationItem = ({
       {page === '...' ? (
         <Page active={activePage === page}>{page}</Page>
       ) : (
-        <Page active={activePage === page} onClick={() => onClick(page)}>
+        <Page
+          tabIndex={0}
+          active={activePage === page}
+          onClick={() => onClick(page)}
+        >
           {page}
         </Page>
       )}

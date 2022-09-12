@@ -17,26 +17,3 @@ export const WrapperPagination = styled.div`
     gap: ${theme.spacings.xxsmall};
   `}
 `;
-
-export const TotalPagination = styled.p`
-  ${({ theme }) => css`
-    display: flex;
-    font-size: ${theme.font.sizes.medium};
-    color: ${theme.colors.gray};
-  `}
-`;
-
-export const TextHighlight = styled.span`
-  ${({ theme }) => css`
-    color: ${theme.colors.gray};
-    font-weight: ${theme.font.normal};
-    margin: 0 4px;
-  `}
-`;
-
-export const TextBold = styled.span`
-  ${({ theme }) => css`
-    color: ${theme.colors.black};
-    margin: 0 4px;
-  `}
-`;

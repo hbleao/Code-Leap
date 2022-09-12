@@ -82,5 +82,6 @@ export const Content = styled.p`
     font-weight: ${theme.font.normal};
     font-size: ${theme.font.sizes.large};
     color: ${theme.colors.black};
+    word-wrap: break-word;
   `}
 `;

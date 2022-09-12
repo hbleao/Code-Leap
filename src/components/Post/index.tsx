@@ -33,11 +33,13 @@ export const Post = ({
         {isOwner && (
           <S.ButtonGroup>
             <Button
-              onClick={() => handleDelete(id)}
+              tabIndex={0}
+              onClick={() => handleDelete({ id, title, content })}
               icon={<SvgDelete />}
               aria-label="Delete post"
             />
             <Button
+              tabIndex={0}
               onClick={() => handleEdit({ id, title, content })}
               icon={<SvgEdit />}
               aria-label="Edit post"

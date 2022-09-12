@@ -1,4 +1,4 @@
-export type EditParamsProps = {
+export type PostParamsProps = {
   id: number;
   title: string;
   content: string;
@@ -11,6 +11,6 @@ export type PostProps = {
   content: string;
   currentUsername: string;
   created_datetime: string;
-  handleDelete: (id: number) => void;
-  handleEdit: (params: EditParamsProps) => void;
+  handleDelete: (params: PostParamsProps) => void;
+  handleEdit: (params: PostParamsProps) => void;
 };

@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { Provider as ReduxProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Toaster } from 'react-hot-toast';
 
 import { GlobalStyles } from './styles/global';
 
@@ -21,6 +22,7 @@ export const App = () => {
           <ThemeProvider theme={theme}>
             <ApplicationRoutes />
             <GlobalStyles />
+            <Toaster />
           </ThemeProvider>
         </QueryClientProvider>
       </PersistGate>

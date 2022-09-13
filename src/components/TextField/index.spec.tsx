@@ -43,6 +43,14 @@ describe('TextField', () => {
     expect(label).not.toBeInTheDocument();
   });
 
+  it('should be able render a TextField with label', () => {
+    makeSut({ label: 'Name', htmlFor: 'name' });
+
+    const label = screen.getByText(/name/i);
+
+    expect(label).toBeInTheDocument();
+  });
+
   it('should be able render a TextField with initial value', () => {
     makeSut({ value: 'Jhon doe' });
 

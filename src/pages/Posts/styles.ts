@@ -92,3 +92,9 @@ export const ModalContent = styled.div`
 `;
 
 export const ModalForm = styled.form``;
+
+export const SearchContainer = styled.div`
+  ${({ theme }) => css`
+    margin-top: ${theme.spacings.xlarge};
+  `}
+`;

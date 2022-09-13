@@ -22,7 +22,8 @@ export const Posts = () => {
     data: postList,
     isLoading: isPostListLoading,
     setPagination,
-    pagination
+    pagination,
+    setTerm
   } = usePosts(state.updatePostList);
   const isDisableButtonCreatePost =
     !state.title || !state.content || state.isCreatingPost;
@@ -92,6 +93,11 @@ export const Posts = () => {
     }
   };
 
+  const handleDoSearch = (term: string) => {
+    console.log(term);
+    setTerm(term);
+  };
+
   return (
     <Presentation
       reduxState={reduxState}
@@ -107,6 +113,7 @@ export const Posts = () => {
       handleDeletePost={handleDeletePost}
       handleUpdatePost={handleUpdatePost}
       handleSubmit={handleSubmit}
+      handleDoSearch={handleDoSearch}
     />
   );
 };

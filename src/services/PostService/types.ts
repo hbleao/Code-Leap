@@ -14,6 +14,7 @@ export type CreatePostProps = {
 };
 
 export type GetPostProps = {
+  username?: string;
   limit: number;
   offset?: number;
 };

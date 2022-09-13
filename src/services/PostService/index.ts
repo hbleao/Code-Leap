@@ -11,7 +11,7 @@ import {
 export const PostService = {
   get: async (params: GetPostProps) => {
     const httpRequest = await Api.get<PostServiceResult>(
-      `?${queryString(params)}`
+      `?${queryString(params)}/`
     );
     return httpRequest.data;
   },

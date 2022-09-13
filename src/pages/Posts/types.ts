@@ -17,4 +17,5 @@ export type PresentationProps = {
   handleSubmit: (event: FormEvent) => void;
   handleUpdatePost: () => void;
   handleDeletePost: () => void;
+  handleDoSearch: (term: string) => void;
 };

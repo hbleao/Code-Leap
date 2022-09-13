@@ -11,6 +11,7 @@ import {
   Modal,
   Pagination,
   Post,
+  Search,
   Skeleton,
   TextareaField,
   TextField
@@ -33,7 +34,8 @@ export const Presentation = ({
   setPagination,
   handleDeletePost,
   handleUpdatePost,
-  handleSubmit
+  handleSubmit,
+  handleDoSearch
 }: PresentationProps) => {
   return (
     <S.Container>
@@ -76,6 +78,10 @@ export const Presentation = ({
             </Button>
           </S.ButtonGroup>
         </S.Form>
+
+        <S.SearchContainer>
+          <Search placeholder="Search by username" doSearch={handleDoSearch} />
+        </S.SearchContainer>
 
         {postList?.results?.length > 0 && !isPostListLoading && (
           <ErrorBoundary>

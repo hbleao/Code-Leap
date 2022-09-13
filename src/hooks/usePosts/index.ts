@@ -3,8 +3,11 @@ import { useQuery } from 'react-query';
 
 import { PostService } from '@/services';
 import { PostServiceResult } from './types';
+import { useDebounce } from '../useDebounce';
 
 export const usePosts = (forceUpdate?: any) => {
+  const [term, setTerm] = useState('');
+  const inputDebounce = useDebounce(term, 700);
   const [pagination, setPagination] = useState({
     activePage: 1,
     totalPages: 0,
@@ -13,9 +16,10 @@ export const usePosts = (forceUpdate?: any) => {
   });
 
   const { data, isError, isLoading } = useQuery(
-    ['post', pagination.activePage, forceUpdate],
+    ['get-posts', pagination.activePage, inputDebounce, forceUpdate],
     () =>
       PostService.get({
+        username: inputDebounce,
         limit: pagination.limit,
         offset: pagination.offset
       })
@@ -26,6 +30,8 @@ export const usePosts = (forceUpdate?: any) => {
     errors: isError,
     isLoading,
     pagination,
-    setPagination
+    setPagination,
+    term,
+    setTerm
   };
 };

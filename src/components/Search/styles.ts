@@ -15,7 +15,7 @@ export const Container = styled.form`
 `;
 
 export const Input = styled.input`
-  ${({ theme }) => css`
+  ${() => css`
     width: 100%;
     height: 4rem;
     border: none;

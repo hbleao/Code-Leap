@@ -10,3 +10,8 @@ jest
 # Webpack
 webpack.js
 webpack.dev.js
+webpack.prod.js
+
+# Production
+dist
+server

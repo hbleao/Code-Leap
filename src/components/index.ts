@@ -7,3 +7,4 @@ export { TextareaField } from './TextareaField';
 export { Skeleton } from './Skeleton';
 export { Pagination } from './Pagination';
 export { ErrorBoundary } from './ErrorBoundary';
+export { Search } from './Search';

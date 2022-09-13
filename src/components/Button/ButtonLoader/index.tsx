@@ -5,7 +5,7 @@ import { ButtonLoaderProps } from './types';
 
 export const ButtonLoader = ({ loaderColor = 'white' }: ButtonLoaderProps) => {
   return (
-    <S.Container loaderColor={loaderColor}>
+    <S.Container data-testid="loader-button" loaderColor={loaderColor}>
       <div></div>
       <div></div>
       <div></div>

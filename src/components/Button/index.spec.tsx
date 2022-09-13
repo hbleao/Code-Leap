@@ -10,16 +10,23 @@ type MakeSutProps = {
   isDisabled?: boolean;
   isOutline?: boolean;
   icon?: ReactNode;
+  isLoading?: boolean;
 };
 
 const makeSut = ({
   children = 'click here',
   isDisabled = false,
   isOutline = false,
+  isLoading = false,
   icon
 }: MakeSutProps) => {
   const sut = renderWithTheme(
-    <Button isDisabled={isDisabled} isOutline={isOutline} icon={icon}>
+    <Button
+      isDisabled={isDisabled}
+      isOutline={isOutline}
+      icon={icon}
+      isLoading={isLoading}
+    >
       {children}
     </Button>
   );
@@ -71,10 +78,18 @@ describe('Button', () => {
     });
   });
 
-  it('should render an icon version', () => {
+  it('should render an button with icon version', () => {
     makeSut({ children: 'buy now', icon: <TrashBin /> });
 
     const buttonIcon = document.querySelector('svg');
+
+    expect(buttonIcon).toBeInTheDocument();
+  });
+
+  it('should render an button with loader', () => {
+    makeSut({ children: 'buy now', icon: <TrashBin />, isLoading: true });
+
+    const buttonIcon = screen.getByTestId('loader-button');
 
     expect(buttonIcon).toBeInTheDocument();
   });

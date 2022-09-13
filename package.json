@@ -3,7 +3,9 @@
   "author": "Henrique Leão <hbragaleao@gmail.com>",
   "description": "this repository refers to the code leap test",
   "scripts": {
+    "start": "node ./server",
     "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "lint": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "test": "jest --bail --passWithNoTests",
     "test:watch": "jest --watch",
@@ -15,9 +17,12 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
-    "@styled-icons/ionicons-solid": "^10.34.0",
     "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "date-fns": "^2.29.2",
+    "express": "^4.18.1",
+    "express-history-api-fallback": "^2.2.1",
     "immer": "^9.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

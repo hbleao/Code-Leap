@@ -1,5 +1,5 @@
 type QueryStringProps = {
-  [key: string]: string;
+  [key: string]: string | number;
 };
 
 export function queryString(params: QueryStringProps) {
